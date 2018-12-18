@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <title>Audio Project</title>
+ </head>
+ <body>
+ 
+    <h1>Fill in the boxes below and get ready to laugh</h1>
+     
+    <ul>
+      <li>Noun: <input type="text" id="noun"></li><br>
+      <li>Adjective: <input type="text" id="adjective"></li><br>
+      <li>Vehicle: <input type="text" id="car"></li><br>
+	  <li>Verb ending in ing: <input type="text" id="verb"></li><br>
+	  <li>name: <input type="text" id="name"></li><br>
+	  
+	  
+    </ul>
+     
+    <button id="lib-button">Click Me</button>
+      
+    <p>Generated story: 
+    <span id="story"></span>
+    </p>
+ 
+    <script type="text/javascript">
+		
+       var libButton = document.getElementById('lib-button');
+	   var storyDiv = document.getElementById("story");
+	   var noun = document.getElementById('noun').value;
+	   
+	  
+	   var libIt = function() {
+			
+			var noun = document.getElementById('noun').value;
+			var adj = document.getElementById('adjective').value;
+			var vehicle = document.getElementById('car').value;
+			var verb = document.getElementById('verb').value;
+			var name = document.getElementById('name').value;
+			
+            
+            
+            storyDiv.innerHTML = "One day " + name + " decided to go " + verb +  " over to the " + adj + " grocery store to buy some " + noun +  " in his new " + adj + " " + vehicle;
+
+			
+			var msg = new SpeechSynthesisUtterance("One day " + name + " decided to go " + verb +  " over to the " + adj + " grocery store to buy some " + noun +  " in his new " + adj + " " + vehicle);
+			window.speechSynthesis.speak(msg);
+			
+			
+			 var recognition = new SpeechRecognition();
+				recognition.maxAlternatives = 10;
+				recognition.onresult = function(event) {
+					if (event.results.length > 0) {
+						var result = event.results[0];
+						for (var i = 0; i < result.length; ++i) {
+							var text = result[i].transcript;
+							select.options[i] = new Option(text, text);
+						}
+					}
+				}
+				
+
+
+            
+			
+        };
+        libButton.addEventListener('click', libIt);
+		
+		
+        
+    </script>
+	 
+  
+ </body>
+</html>
